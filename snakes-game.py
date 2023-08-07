@@ -4,7 +4,12 @@ import sys
 
 pygame.init()
 
+
+# TODO: fix the speed meter it's not working properly
+# TODO: add a record variable that will serve as a goal 
+# TODO: chage the food square to be an icone of some sorts 
 # Set up the window dimensions
+
 window_width, window_height = 640, 480
 window = pygame.display.set_mode((window_width, window_height))
 pygame.display.set_caption('Snake Game by Vuk')
