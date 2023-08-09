@@ -45,6 +45,26 @@ def snake(snake_list):
     for x in snake_list:
         pygame.draw.rect(window, white, [x[0], x[1], snake_block, snake_block])
 
+
+# Game over message that is displayed to the user when the game has finished
+def game_over_message():
+    window.fill(game_over_color)
+    font = pygame.font.Font(None, 36)
+    message = font.render("Game over", True, black)
+    window.blit(message, (window_width // 2 - 80, window_height // 2 - 20))
+    pygame.display.update()
+
+# Wait for restart function 
+def wait_for_restart():
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.K_SPACE:
+                waiting = False
+
 def game_loop():
     global game_over, snake_speed, best_score
 
@@ -113,43 +133,24 @@ def game_loop():
                 random.randrange(0, window_height - snake_block) / 10.0) * 10.0
             snake_length += 1
             # Increase the snake's speed and control it with a maximum value
-            snake_speed = min(snake_speed + 3, speed_limit)
+            snake_speed = min(snake_speed + 2, speed_limit)
             score += 1 
 
         # Check for window boundaries collision
         if snake_x >= window_width or snake_x < 0 or snake_y >= window_height or snake_y < 0:
             game_over = True
+            game_over_message()
 
-
-        # Code below check for self-collision
 
         # Check for self-collision
         for segment in snake_list[:-1]:
             if segment == snake_head:
                 game_over = True
-                pygame.quit()
-
+                game_over_message()
     
-    # Display game over message and wait for player's input
-    game_over_message()
+    
     wait_for_restart()
 
-def game_over_message():
-    window.fill(game_over_color)
-    font = pygame.font.Font(None, 36)
-    message = font.render("Game over", True, black)
-    window.blit(message, (window_width // 2 - 80, window_height // 2 - 20))
-    pygame.display.update()
-
-def wait_for_restart():
-    waiting = True
-    while waiting:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.K_SPACE:
-                waiting = False
 
 
 if __name__ == '__main__':
