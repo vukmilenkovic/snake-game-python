@@ -51,13 +51,13 @@ def snake(snake_list):
 def game_over_message():
     window.fill(game_over_color)
     font = pygame.font.Font(None, 36)
-    message = font.render("Game over", True, black)
+    message = font.render("Game over press SPACE key to play again", True, white)
     message_rect = message.get_rect(center=(window_width // 2, window_height // 2))
     window.blit(message, message_rect)
     pygame.display.update()
 
     # Set a timer for how long the message should be displayed (in milliseconds)
-    message_duration = 3000  # 3 seconds
+    message_duration = 5000  # 3 seconds
     start_time = pygame.time.get_ticks()
 
     while pygame.time.get_ticks() - start_time < message_duration:
