@@ -7,7 +7,6 @@ pygame.init()
 
 
 # TODO: add more content to the game over screen
-# TODO: figure out how to keep track of the best score
 # TODO: add a record variable that will serve as a goal 
 # TODO: chage the food square to be an icone of some sorts 
 # Set up the window dimensions
@@ -40,11 +39,15 @@ score = 0
 speed_limit = snake_speed + 388
 
 # High score
-best_score = 0
+best_score = [0]
 
 def snake(snake_list):
     for x in snake_list:
         pygame.draw.rect(window, white, [x[0], x[1], snake_block, snake_block])
+
+def check_high_score():
+    if score > best_score[0]:
+        return True
 
 
 # Game over message that is displayed to the user when the game has finished
@@ -156,6 +159,12 @@ def game_loop():
                 snake_speed = min(snake_speed + 2, speed_limit)
                 score += 1 
 
+            # Interacting with the best_score variable
+            if check_high_score():
+                del best_score[0]
+                best_score.append(score)
+                
+                
             # Check for window boundaries collision
             if snake_x >= window_width or snake_x < 0 or snake_y >= window_height or snake_y < 0:
                 game_over = True
@@ -171,7 +180,7 @@ def game_loop():
                     if game_over_message():
                         break
                     
-
+        print(best_score)
         
 
     """
