@@ -103,6 +103,9 @@ def game_loop():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     game_over = True
+                    # Quit the game if the user presses the X on the window
+                    pygame.quit()
+                    sys.exit()
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_UP:
