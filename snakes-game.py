@@ -156,7 +156,7 @@ def game_loop():
                     random.randrange(0, window_height - snake_block) / 10.0) * 10.0
                 snake_length += 1
                 # Increase the snake's speed and control it with a maximum value
-                snake_speed = min(snake_speed + 2, speed_limit)
+                snake_speed = min(snake_speed + 1, speed_limit)
                 score += 1 
 
             # Interacting with the best_score variable
